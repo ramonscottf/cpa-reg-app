@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="theme-color" content="#E87722">
+<title>CPA REG Prep · Pack Tax South Ogden</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='40' rx='10' fill='%23E87722'/><rect y='30' width='64' height='34' rx='10' fill='%237D7D7D'/><rect y='30' width='64' height='10' fill='%23E87722'/><text x='22' y='32' font-family='system-ui' font-weight='900' font-size='24' fill='white'>Tax</text><path d='M24 50 L30 56 L42 44' stroke='white' stroke-width='4' stroke-linecap='round' fill='none'/></svg>">
+<style>*{margin:0;padding:0;box-sizing:border-box}body{font-family:system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased}</style>
+</head>
+<body>
+<div id="root"></div>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react/18.2.0/umd/react.production.min.js"></script>
+<script crossorigin src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/18.2.0/umd/react-dom.production.min.js"></script>
+<script>
+const e=React.createElement,{useState,useEffect,useCallback,useRef}=React;
+const PT={orange:"#E87722",orangeLight:"#F28C3C",orangeDark:"#CC6510",orangeBg:"#FFF5ED",gray:"#7D7D7D",grayDark:"#4A4A4A",grayLight:"#B0B0B0",bg:"#FAFAFA",card:"#FFFFFF",cardAlt:"#F5F5F5",text:"#333",textMuted:"#6B6B6B",textLight:"#999",border:"#E5E5E5",green:"#4CAF50",red:"#E53935",amber:"#F9A825"};
+
+const store={get(k){try{const v=localStorage.getItem(k);return v?JSON.parse(v):null}catch{return null}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch{}}};
+
+const QS=[
+{id:"eth-1",a:"Ethics & Professional Responsibilities",t:"Circular 230",q:"Under Treasury Circular 230, which of the following is a practitioner NOT required to do?",o:["Exercise due diligence in preparing tax returns","Return client records upon request","Guarantee a specific tax outcome to a client","Inform a client of any noncompliance with tax laws"],c:2,x:"Circular 230 prohibits practitioners from making unreasonable guarantees about tax outcomes. Practitioners must exercise due diligence, return records, and inform clients of noncompliance."},
+{id:"eth-2",a:"Ethics & Professional Responsibilities",t:"AICPA Standards",q:"A CPA discovers an error in a previously filed tax return. Under AICPA SSTS, the CPA should:",o:["File an amended return without client consent","Promptly notify the client and recommend corrective action","Notify the IRS directly","Withdraw without notifying the client"],c:1,x:"SSTS No. 6 requires the CPA to promptly advise the client of the error and recommend corrective measures. Cannot file amended or contact IRS without client authorization."},
+{id:"eth-3",a:"Ethics & Professional Responsibilities",t:"Tax Return Positions",q:"Minimum confidence level for an undisclosed tax return position to avoid §6694 penalties?",o:["Reasonable basis","Substantial authority","More likely than not","Realistic possibility of success"],c:1,x:"Undisclosed positions require 'substantial authority' (~40%). Disclosed = 'reasonable basis.' Tax shelters = 'more likely than not' (>50%)."},
+{id:"proc-1",a:"Federal Tax Procedures",t:"Statute of Limitations",q:"The general statute of limitations for the IRS to assess additional tax is:",o:["2 years from filing","3 years from the later of filing date or due date","5 years from filing","6 years from the later of filing date or due date"],c:1,x:"IRC §6501(a): 3-year assessment period from the later of actual filing date or due date. 6 years applies when gross income understated >25%."},
+{id:"proc-2",a:"Federal Tax Procedures",t:"Penalties",q:"The penalty for substantial understatement of income tax under §6662 is:",o:["10%","20%","50%","75%"],c:1,x:"§6662 accuracy-related penalty = 20% of underpayment. 'Substantial understatement' = exceeds greater of 10% of correct tax or $5,000 ($10K for C corps)."},
+{id:"proc-3",a:"Federal Tax Procedures",t:"IRS Appeals",q:"After a 30-day letter, a disagreeing taxpayer should:",o:["File Tax Court petition","File written protest with IRS Appeals Office","Pay deficiency and file for refund","Wait for 90-day letter"],c:1,x:"30-day letter → file written protest with Appeals. Tax Court petition comes after the 90-day statutory notice of deficiency."},
+{id:"proc-4",a:"Federal Tax Procedures",t:"Taxpayer Rights",q:"Which IRS document outlines audit process and taxpayer rights?",o:["Publication 1","Publication 17","Publication 334","Publication 556"],c:0,x:"Publication 1, 'Your Rights as a Taxpayer,' outlines the Taxpayer Bill of Rights and examination/appeal/collection processes."},
+{id:"bl-1",a:"Business Law",t:"Contracts",q:"Under the Statute of Frauds, which contract must be in writing?",o:["Sale of goods at $400","Contract performable within one year","Sale of real property","Services valued at $300"],c:2,x:"Real property contracts must be in writing. Goods require writing only if $500+ (UCC §2-201). Contracts performable within 1 year need not be written."},
+{id:"bl-2",a:"Business Law",t:"Consideration",q:"Which constitutes valid consideration?",o:["Promise to perform pre-existing duty","Past consideration","Bargained-for exchange of legal value","Moral obligation to pay"],c:2,x:"Valid consideration = bargained-for exchange of legal value. Pre-existing duties, past consideration, and moral obligations don't qualify."},
+{id:"bl-3",a:"Business Law",t:"Agency",q:"An agent's apparent authority arises from:",o:["Agent's representations to third parties","Principal's representations/conduct toward third parties","Written agreement between agent and principal","Agent's belief about scope"],c:1,x:"Apparent authority = principal's words/conduct leading third parties to reasonably believe agent has authority. NOT agent's own representations."},
+{id:"bl-4",a:"Business Law",t:"Bankruptcy",q:"In Chapter 7, which debt is generally NOT dischargeable?",o:["Credit card debt","Medical bills","Student loans (absent undue hardship)","Breach of contract damages"],c:2,x:"Student loans nondischargeable unless 'undue hardship' (Brunner test). Also nondischargeable: certain taxes, child support, alimony, fraud debts."},
+{id:"bl-5",a:"Business Law",t:"Suretyship",q:"A surety's right to recover from the principal debtor after paying the creditor:",o:["Subrogation","Exoneration","Reimbursement","Contribution"],c:2,x:"Reimbursement = recover from debtor. Subrogation = step into creditor's shoes. Exoneration = force debtor to pay first. Contribution = between co-sureties."},
+{id:"bl-6",a:"Business Law",t:"UCC Article 2",q:"A merchant's firm offer is irrevocable for maximum:",o:["30 days","60 days","90 days","120 days"],c:2,x:"Merchant's written, signed firm offer irrevocable for stated period or reasonable time, max 3 months (90 days) under UCC §2-205."},
+{id:"bl-7",a:"Business Law",t:"Property",q:"Recording a deed provides:",o:["Actual notice to all","Constructive notice to subsequent purchasers","Guarantee of clear title","Protection against all prior claims"],c:1,x:"Recording = constructive notice to subsequent purchasers. Does not guarantee title or protect against all prior claims."},
+{id:"prop-1",a:"Property Transactions",t:"Basis",q:"Gift property: FMV=$8K, donor basis=$12K. Sold for $10K. Result?",o:["$2,000 gain","$2,000 loss","$0","$10,000 gain"],c:2,x:"Dual basis rule: gain basis=$12K, loss basis=$8K. Sold between → $0."},
+{id:"prop-2",a:"Property Transactions",t:"Like-Kind Exchanges",q:"Under §1031, which qualifies as like-kind?",o:["Inventory for real property","Rental building for undeveloped land","Stock for rental property","Partnership interests"],c:1,x:"Post-TCJA §1031 = real property only. Rental building for land qualifies. Inventory, stocks, partnership interests excluded."},
+{id:"prop-3",a:"Property Transactions",t:"Capital Gains",q:"§1231 property sold at a gain is treated as:",o:["Ordinary income","LTCG (subject to lookback recapture)","STCG","Passive income"],c:1,x:"Net §1231 gains = LTCG. 5-year lookback may recapture as ordinary to extent of prior unrecaptured §1231 losses."},
+{id:"prop-4",a:"Property Transactions",t:"Depreciation Recapture",q:"§1245 property sold at gain — depreciation recapture is:",o:["LTCG","Ordinary income to extent of depreciation","25% unrecaptured gain","QDI"],c:1,x:"§1245 = full recapture as ordinary income to extent of all depreciation taken. Excess = §1231 gain."},
+{id:"prop-5",a:"Property Transactions",t:"§121 Exclusion",q:"Single taxpayer §121 exclusion on principal residence?",o:["$100,000","$250,000","$500,000","$750,000"],c:1,x:"$250K single, $500K MFJ. Must own + use as principal residence 2 of 5 years before sale."},
+{id:"ind-1",a:"Individual Taxation",t:"Filing Status",q:"Spouse died 2024, taxpayer has dependent child. 2025 status?",o:["MFJ","Qualifying Surviving Spouse","Head of Household","Single"],c:1,x:"QSS for 2 years after year of death if maintaining home for dependent child. MFJ only for year of death."},
+{id:"ind-2",a:"Individual Taxation",t:"Gross Income",q:"Which is excluded from gross income?",o:["Unemployment","Gambling winnings","Gifts and inheritances","Pre-2019 alimony received"],c:2,x:"§102 excludes gifts/inheritances (income from inherited property IS taxable). Unemployment, gambling, pre-2019 alimony = includable."},
+{id:"ind-3",a:"Individual Taxation",t:"Deductions",q:"Which is deductible on Schedule A?",o:["Federal income taxes","Political contributions","State/local property taxes (up to $10K)","Non-disaster casualty losses"],c:2,x:"Post-TCJA: SALT up to $10K ($5K MFS). Federal taxes, political contributions, non-disaster casualties not deductible."},
+{id:"ind-4",a:"Individual Taxation",t:"Credits",q:"2025 Child Tax Credit is generally:",o:["$1,000/child","$2,000/child under 17","$3,000/child","$3,600/child under 6"],c:1,x:"$2K/child under 17. Phase-out at $200K ($400K MFJ). Up to $1,700 refundable as ACTC."},
+{id:"ind-5",a:"Individual Taxation",t:"AMT",q:"Which AMT adjustment increases AMTI?",o:["Charitable contributions","SALT deduction","Acquisition mortgage interest","Medical over 7.5% AGI"],c:1,x:"SALT not deductible for AMT → added back. Charitable, mortgage interest, medical allowed for both regular and AMT."},
+{id:"ent-1",a:"Entity Taxation",t:"C Corporations",q:"Current federal C corp tax rate?",o:["15%","21%","28%","35%"],c:1,x:"TCJA: flat 21% effective after Dec 31, 2017."},
+{id:"ent-2",a:"Entity Taxation",t:"S Corporations",q:"Which terminates an S election?",o:["90 shareholders","Second class of stock","Fiscal year end","U.S. citizen shareholder"],c:1,x:"One class of stock only. Also terminated by >100 shareholders, NRA shareholders, certain entity shareholders."},
+{id:"ent-3",a:"Entity Taxation",t:"Partnerships",q:"Partner's outside basis is increased by:",o:["Allocated losses","Share of partnership liabilities","Distributions received","Guaranteed payments received"],c:1,x:"Basis up: contributions, income, liabilities. Down: distributions, losses, liability decreases, nondeductible expenses."},
+{id:"ent-4",a:"Entity Taxation",t:"Partnerships",q:"§721 property contribution to partnership results in:",o:["Gain = FMV of interest","No gain or loss","Gain to extent of liabilities assumed","Ordinary income = built-in gain"],c:1,x:"§721: nonrecognition. Partnership takes carryover basis; partner takes substituted basis."},
+{id:"ent-5",a:"Entity Taxation",t:"Exempt Organizations",q:"UBTI does NOT include:",o:["Regularly carried-on business income","Dividends and interest","Debt-financed property income","Commercial advertising revenue"],c:1,x:"Dividends, interest, royalties, rents, cap gains excluded under §512(b). Debt-financed and regular unrelated business income IS UBTI."},
+{id:"ent-6",a:"Entity Taxation",t:"S Corporations",q:"S corp shareholder stock basis is reduced by:",o:["Tax-exempt income","Separately stated losses","Increases in corp liabilities","Capital contributions"],c:1,x:"Reduced by: distributions, losses, nondeductible expenses. Increased by: income, contributions, tax-exempt income."},
+{id:"sim-1",a:"Individual Taxation",t:"Comprehensive",q:"Single, 45: Salary $90K, Interest $2K, LTCG $5K, State taxes $7K, Mortgage $8K, Charity $3K. Taxable income (std ded $15K)?",o:["$72,000","$79,000","$82,000","$97,000"],c:1,x:"AGI=$97K. Itemized=$18K>$15K std. Taxable=$97K-$18K=$79,000."},
+{id:"sim-2",a:"Business Law",t:"UCC Damages",q:"500 widgets at $10, market rose to $15, seller repudiated. Buyer's UCC damages?",o:["$2,500 (cover−contract × qty)","$5,000","Full contract price $5,000","$2,500 plus incidentals"],c:0,x:"UCC §2-712/713: ($15−$10)×500=$2,500 plus incidentals."},
+];
+
+const FCS=[
+{id:"fc-1",a:"Ethics",f:"What is Treasury Circular 230?",b:"Federal regs governing practice before the IRS.\n• Due diligence required\n• Must return client records\n• No unconscionable fees\n• No guarantees\n• Covers CPAs, EAs, attorneys"},
+{id:"fc-2",a:"Tax Procedures",f:"4 types of IRS audits?",b:"1) Correspondence (mail)\n2) Office (IRS office)\n3) Field (taxpayer location)\n4) TCMP/NRP (random)"},
+{id:"fc-3",a:"Tax Procedures",f:"SOL exceptions (>3 years)?",b:"• 6 yrs: Omission >25% gross income\n• No limit: Fraud or no filing\n• Refund: Later of 3 yrs from filing or 2 yrs from payment"},
+{id:"fc-4",a:"Business Law",f:"Valid contract elements?",b:"1) Mutual assent (offer+acceptance)\n2) Consideration\n3) Capacity\n4) Legality\n+ Statute of Frauds if applicable"},
+{id:"fc-5",a:"Business Law",f:"Statute of Frauds — MY LEGS",b:"M — Marriage\nY — Year (can't perform in 1 yr)\nL — Land\nE — Executor (estate debts)\nG — Goods ($500+ UCC)\nS — Surety (another's debt)"},
+{id:"fc-6",a:"Business Law",f:"Bankruptcy chapters?",b:"Ch. 7 — Liquidation\nCh. 11 — Reorganization\nCh. 13 — Wage earner plan\nCh. 12 — Family farmer/fisherman"},
+{id:"fc-7",a:"Property Transactions",f:"Dual basis for gifts?",b:"Gain basis = Donor's basis\nLoss basis = Lower of basis or FMV\nBetween → No gain or loss"},
+{id:"fc-8",a:"Property Transactions",f:"§1231/§1245/§1250?",b:"§1231: Biz property >1yr. Gain=LTCG, Loss=ordinary\n§1245: Full recapture as ordinary (personal property)\n§1250: Excess over SL as ordinary. Unrecaptured=25%"},
+{id:"fc-9",a:"Individual Taxation",f:"Key above-the-line deductions?",b:"• Educator ($300)\n• HSA\n• SE tax (50%)\n• SE health insurance\n• IRA\n• Student loan int ($2,500)\n• Alimony (pre-2019)"},
+{id:"fc-10",a:"Entity Taxation",f:"S Corp eligibility?",b:"• Domestic corp\n• ≤100 shareholders\n• Individuals/estates/certain trusts\n• No NRA shareholders\n• One class of stock\n• Not ineligible corp"},
+{id:"fc-11",a:"Entity Taxation",f:"Partnership basis?",b:"↑ Contributions, income, liabilities\n↓ Distributions, losses, liabilities down\nCannot go below zero"},
+{id:"fc-12",a:"Entity Taxation",f:"Accumulated earnings tax?",b:"20% penalty on C corp earnings beyond reasonable needs.\nCredit: Greater of $250K ($150K PSC) or business need."},
+];
+
+const AREAS=[
+{k:"Ethics & Professional Responsibilities",l:"Ethics & Procedures",cl:PT.orange,w:"10-20%"},
+{k:"Federal Tax Procedures",l:"Tax Procedures",cl:"#D4812A",w:"10-20%"},
+{k:"Business Law",l:"Business Law",cl:"#C0392B",w:"10-20%"},
+{k:"Property Transactions",l:"Property Transactions",cl:"#E67E22",w:"12-22%"},
+{k:"Individual Taxation",l:"Individual Tax",cl:PT.green,w:"15-25%"},
+{k:"Entity Taxation",l:"Entity Tax",cl:"#8E44AD",w:"18-28%"},
+];
+
+function App(){
+const[view,setView]=useState("home");
+const[prog,setProg]=useState(null);
+const[loading,setLoading]=useState(true);
+const[selArea,setSelArea]=useState(null);
+const[qzQs,setQzQs]=useState([]);
+const[curQ,setCurQ]=useState(0);
+const[sel,setSel]=useState(null);
+const[showExp,setShowExp]=useState(false);
+const[results,setResults]=useState([]);
+const[fcIdx,setFcIdx]=useState(0);
+const[flipped,setFlipped]=useState(false);
+const[examMode,setExamMode]=useState(false);
+const[timer,setTimer]=useState(0);
+const timerRef=useRef(null);
+
+useEffect(()=>{const p=store.get("cpa-reg-pt");setProg(p||{ans:{},cor:{},str:{},ses:0,tc:0,ta:0});setLoading(false);},[]);
+const sv=useCallback((p)=>{setProg(p);store.set("cpa-reg-pt",p);},[]);
+const rst=useCallback(()=>{sv({ans:{},cor:{},str:{},ses:0,tc:0,ta:0});},[sv]);
+
+const startQ=(area,exam)=>{
+let pool=area?QS.filter(q=>q.a===area):[...QS];
+for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
+const n=exam?Math.min(pool.length,20):Math.min(pool.length,10);
+setQzQs(pool.slice(0,n));setCurQ(0);setSel(null);setShowExp(false);setResults([]);setExamMode(exam);
+if(exam)setTimer(n*90);setView("quiz");
+};
+
+useEffect(()=>{
+if(examMode&&view==="quiz"&&timer>0){timerRef.current=setInterval(()=>setTimer(t=>t>0?t-1:0),1000);return()=>clearInterval(timerRef.current);}
+},[examMode,view,timer]);
+
+const answer=(idx)=>{
+if(showExp&&!examMode)return;setSel(idx);if(!examMode)setShowExp(true);
+const q=qzQs[curQ],ok=idx===q.c;
+setResults(p=>[...p,{id:q.id,ok,sel:idx}]);
+const np={...prog};np.ans[q.id]=(np.ans[q.id]||0)+1;
+if(ok){np.cor[q.id]=(np.cor[q.id]||0)+1;np.str[q.id]=(np.str[q.id]||0)+1;np.tc++;}
+else{np.str[q.id]=0;}np.ta++;sv(np);
+if(examMode)setTimeout(()=>nxt(),300);
+};
+
+const nxt=()=>{
+if(curQ<qzQs.length-1){setCurQ(c=>c+1);setSel(null);setShowExp(false);}
+else{clearInterval(timerRef.current);sv({...prog,ses:prog.ses+1});setView("results");}
+};
+
+const fcs=selArea?FCS.filter(c=>c.a===selArea):FCS;
+const aSt=(k)=>{const qs=QS.filter(q=>q.a===k);let at=0,co=0,ma=0;qs.forEach(q=>{at+=(prog?.ans[q.id]||0);co+=(prog?.cor[q.id]||0);if((prog?.str[q.id]||0)>=3)ma++;});return{tot:qs.length,pct:at>0?Math.round(co/at*100):0,mas:ma};};
+const ov=prog?.ta>0?Math.round(prog.tc/prog.ta*100):0;
+
+if(loading)return e("div",{style:{display:"flex",alignItems:"center",justifyContent:"center",height:"100vh",background:PT.bg,color:PT.text}},"Loading...");
+
+// RESULTS
+if(view==="results"){
+const co=results.filter(r=>r.ok).length,tot=results.length,pct=Math.round(co/tot*100);
+return e("div",{style:{minHeight:"100vh",background:PT.bg,color:PT.text,padding:20}},
+e("div",{style:{maxWidth:600,margin:"0 auto"}},
+e("div",{style:{textAlign:"center",padding:32,background:PT.card,borderRadius:20,boxShadow:"0 2px 16px rgba(0,0,0,0.06)",marginBottom:24}},
+e("div",{style:{fontSize:56,marginBottom:8}},pct>=75?"🎉":"📚"),
+e("div",{style:{fontSize:48,fontWeight:800,color:pct>=75?PT.green:PT.orange}},pct+"%"),
+e("div",{style:{fontSize:14,color:PT.textMuted}},co+"/"+tot+" correct — "+(pct>=75?"PASSING":"KEEP GOING")),
+e("div",{style:{fontSize:12,color:PT.textLight,marginTop:4}},"CPA REG passing ≈ 75")
+),
+...results.map((r,i)=>{const q=QS.find(x=>x.id===r.id);return e("div",{key:i,style:{background:PT.card,borderRadius:12,padding:14,marginBottom:8,borderLeft:"4px solid "+(r.ok?PT.green:PT.red)}},
+e("div",{style:{fontSize:13,fontWeight:700,color:r.ok?PT.green:PT.red}},(r.ok?"✓ ":"✗ ")+q.t),
+e("div",{style:{fontSize:12,color:PT.textMuted,marginTop:2}},q.q.slice(0,100)+"..."),
+!r.ok&&e("div",{style:{fontSize:11,color:PT.orange,marginTop:4}},"Correct: "+q.o[q.c])
+);}),
+e("button",{onClick:()=>setView("home"),style:{width:"100%",padding:14,background:PT.orange,color:"#fff",border:"none",borderRadius:10,fontSize:15,fontWeight:700,cursor:"pointer",marginTop:16}},"Back to Dashboard")
+));
+}
+
+// QUIZ
+if(view==="quiz"){
+const q=qzQs[curQ],mn=Math.floor(timer/60),sc=timer%60;
+return e("div",{style:{minHeight:"100vh",background:PT.bg,color:PT.text,padding:20}},
+e("div",{style:{maxWidth:600,margin:"0 auto"}},
+e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:14}},
+e("button",{onClick:()=>{clearInterval(timerRef.current);setView("home");},style:{background:"none",border:"none",color:PT.orange,fontSize:14,cursor:"pointer",fontWeight:700}},"← Exit"),
+e("span",{style:{fontSize:13,color:PT.textMuted,fontWeight:600}},(curQ+1)+"/"+qzQs.length),
+examMode&&e("span",{style:{fontSize:14,color:timer<60?PT.red:PT.orange,fontWeight:800,background:PT.cardAlt,padding:"4px 10px",borderRadius:8}},"⏱ "+mn+":"+String(sc).padStart(2,"0"))
+),
+e("div",{style:{height:5,background:PT.border,borderRadius:3,marginBottom:20}},
+e("div",{style:{height:5,background:PT.orange,borderRadius:3,width:(curQ/qzQs.length*100)+"%",transition:"width 0.3s"}})
+),
+e("div",{style:{background:PT.card,borderRadius:16,padding:24,boxShadow:"0 2px 12px rgba(0,0,0,0.05)",marginBottom:16}},
+e("div",{style:{display:"inline-block",padding:"3px 10px",background:PT.orangeBg,borderRadius:6,fontSize:11,fontWeight:700,color:PT.orange,marginBottom:10}},q.a+" · "+q.t),
+e("div",{style:{fontSize:16,fontWeight:600,lineHeight:1.6,color:PT.grayDark}},q.q)
+),
+...q.o.map((opt,i)=>{
+let bg=PT.card,bd="2px solid "+PT.border,col=PT.text;
+if(sel!==null&&!examMode){if(i===q.c){bg="#eaf7eb";bd="2px solid "+PT.green;col="#2e7d32";}else if(i===sel&&i!==q.c){bg="#fdeceb";bd="2px solid "+PT.red;col="#c62828";}}
+else if(sel===i){bg=PT.orangeBg;bd="2px solid "+PT.orange;}
+return e("button",{key:i,onClick:()=>answer(i),disabled:showExp,style:{display:"flex",alignItems:"center",width:"100%",textAlign:"left",padding:"13px 14px",marginBottom:8,background:bg,border:bd,borderRadius:12,color:col,fontSize:14,cursor:showExp?"default":"pointer",lineHeight:1.5,gap:12}},
+e("span",{style:{display:"inline-flex",alignItems:"center",justifyContent:"center",width:28,height:28,borderRadius:"50%",background:sel===i&&!showExp?PT.orange:PT.cardAlt,color:sel===i&&!showExp?"#fff":PT.textMuted,fontWeight:700,fontSize:12,flexShrink:0}},String.fromCharCode(65+i)),
+e("span",null,opt)
+);}),
+showExp&&!examMode&&e("div",{style:{background:PT.orangeBg,borderRadius:12,padding:16,marginTop:12,borderLeft:"4px solid "+PT.orange}},
+e("div",{style:{fontSize:11,fontWeight:700,color:PT.orange,textTransform:"uppercase",letterSpacing:1,marginBottom:6}},"Explanation"),
+e("div",{style:{fontSize:13,color:PT.grayDark,lineHeight:1.7}},q.x)
+),
+showExp&&!examMode&&e("button",{onClick:nxt,style:{width:"100%",padding:14,background:PT.orange,color:"#fff",border:"none",borderRadius:10,fontSize:15,fontWeight:700,cursor:"pointer",marginTop:16}},curQ<qzQs.length-1?"Next Question →":"See Results")
+));
+}
+
+// FLASHCARDS
+if(view==="flashcards"){
+const card=fcs[fcIdx];
+const areas=["Ethics","Tax Procedures","Business Law","Property Transactions","Individual Taxation","Entity Taxation"];
+return e("div",{style:{minHeight:"100vh",background:PT.bg,color:PT.text,padding:20}},
+e("div",{style:{maxWidth:500,margin:"0 auto"}},
+e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:16}},
+e("button",{onClick:()=>{setView("home");setFcIdx(0);setFlipped(false);setSelArea(null);},style:{background:"none",border:"none",color:PT.orange,fontSize:14,cursor:"pointer",fontWeight:700}},"← Back"),
+e("span",{style:{fontSize:13,color:PT.textMuted,fontWeight:600}},(fcIdx+1)+"/"+fcs.length)
+),
+e("div",{style:{display:"flex",gap:6,flexWrap:"wrap",marginBottom:16}},
+e("button",{onClick:()=>{setSelArea(null);setFcIdx(0);setFlipped(false);},style:{padding:"5px 12px",borderRadius:20,border:"none",background:!selArea?PT.orange:PT.card,color:!selArea?"#fff":PT.textMuted,fontSize:11,fontWeight:600,cursor:"pointer"}},"All"),
+...areas.map(a=>e("button",{key:a,onClick:()=>{setSelArea(a);setFcIdx(0);setFlipped(false);},style:{padding:"5px 12px",borderRadius:20,border:"none",background:selArea===a?PT.orange:PT.card,color:selArea===a?"#fff":PT.textMuted,fontSize:11,fontWeight:600,cursor:"pointer"}},a))
+),
+card?e(React.Fragment,null,
+e("div",{onClick:()=>setFlipped(!flipped),style:{background:flipped?PT.grayDark:PT.card,borderRadius:16,padding:28,minHeight:200,display:"flex",flexDirection:"column",justifyContent:"center",cursor:"pointer",border:"2px solid "+(flipped?PT.orange:PT.border),boxShadow:"0 4px 20px rgba(0,0,0,0.06)",transition:"all 0.25s"}},
+e("div",{style:{fontSize:11,color:flipped?PT.orangeLight:PT.textLight,fontWeight:700,textTransform:"uppercase",letterSpacing:1,marginBottom:12}},card.a+" — "+(flipped?"Answer":"Tap to flip")),
+e("div",{style:{fontSize:15,lineHeight:1.8,whiteSpace:"pre-line",color:flipped?"#f0f0f0":PT.grayDark}},flipped?card.b:card.f)
+),
+e("div",{style:{display:"flex",gap:12,marginTop:16}},
+e("button",{disabled:fcIdx===0,onClick:()=>{setFcIdx(i=>i-1);setFlipped(false);},style:{flex:1,padding:12,background:PT.card,color:PT.text,border:"1.5px solid "+PT.border,borderRadius:10,fontSize:14,fontWeight:600,cursor:"pointer",opacity:fcIdx===0?0.3:1}},"← Prev"),
+e("button",{disabled:fcIdx>=fcs.length-1,onClick:()=>{setFcIdx(i=>i+1);setFlipped(false);},style:{flex:1,padding:12,background:PT.orange,color:"#fff",border:"none",borderRadius:10,fontSize:14,fontWeight:600,cursor:"pointer",opacity:fcIdx>=fcs.length-1?0.3:1}},"Next →")
+)
+):e("div",{style:{color:PT.textLight,textAlign:"center",marginTop:40}},"No cards here.")
+));
+}
+
+// HOME
+return e("div",{style:{minHeight:"100vh",background:PT.bg,color:PT.text,padding:20}},
+e("div",{style:{maxWidth:600,margin:"0 auto"}},
+// Header
+e("div",{style:{textAlign:"center",marginBottom:24,paddingTop:4}},
+e("svg",{width:64,height:64,viewBox:"0 0 64 64",fill:"none",style:{margin:"0 auto 10px"}},
+e("rect",{y:0,width:64,height:40,rx:10,fill:PT.orange}),
+e("rect",{y:30,width:64,height:34,rx:10,fill:PT.gray}),
+e("rect",{y:30,width:64,height:10,fill:PT.orange}),
+e("text",{x:22,y:32,fontFamily:"system-ui",fontWeight:900,fontSize:24,fill:"#fff",letterSpacing:-1},"Tax"),
+e("text",{x:40,y:14,fontFamily:"system-ui",fontWeight:800,fontSize:9,fill:"#fff",letterSpacing:1},"PACK"),
+e("path",{d:"M24 50 L30 56 L42 44",stroke:"#fff",strokeWidth:4,strokeLinecap:"round",strokeLinejoin:"round",fill:"none"}),
+e("rect",{x:2,y:2,width:22,height:11,rx:4,fill:"rgba(255,255,255,0.25)"}),
+e("text",{x:13,y:10.5,textAnchor:"middle",fontFamily:"system-ui",fontWeight:800,fontSize:7.5,fill:"#fff"},"REG")
+),
+e("div",{style:{fontSize:22,fontWeight:800,color:PT.grayDark}},"CPA REG Exam Prep"),
+e("div",{style:{fontSize:13,color:PT.textMuted,marginTop:2}},e("span",null,"Built for "),e("strong",{style:{color:PT.orange}},"Grayce"),e("span",null," · Pack Tax South Ogden"))
+),
+// Score
+e("div",{style:{background:PT.card,borderRadius:16,padding:22,marginBottom:20,boxShadow:"0 2px 12px rgba(0,0,0,0.05)",borderTop:"4px solid "+PT.orange}},
+e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12}},
+e("div",null,
+e("div",{style:{fontSize:13,fontWeight:700,color:PT.grayDark}},"Overall Accuracy"),
+e("div",{style:{fontSize:11,color:PT.textLight,marginTop:2}},(prog?.ta||0)+" questions · "+(prog?.ses||0)+" sessions")
+),
+e("div",{style:{fontSize:36,fontWeight:800,color:ov>=75?PT.green:ov>0?PT.orange:PT.textLight}},ov+"%")
+),
+e("div",{style:{height:8,background:PT.cardAlt,borderRadius:4}},e("div",{style:{height:8,background:ov>=75?PT.green:PT.orange,borderRadius:4,width:ov+"%",transition:"width 0.5s"}})),
+ov>0&&ov<75&&e("div",{style:{fontSize:11,color:PT.orange,marginTop:8,fontWeight:600}},"🎯 Target: 75% to pass"),
+ov>=75&&e("div",{style:{fontSize:11,color:PT.green,marginTop:8,fontWeight:600}},"✓ Above passing threshold!")
+),
+// Actions
+e("div",{style:{display:"grid",gridTemplateColumns:"1fr 1fr",gap:12,marginBottom:24}},
+e("button",{onClick:()=>startQ(null,false),style:{padding:20,background:PT.orange,border:"none",borderRadius:14,color:"#fff",fontSize:14,fontWeight:700,cursor:"pointer",textAlign:"left"}},
+e("div",{style:{fontSize:24,marginBottom:6}},"🎯"),"Quick Quiz",e("br"),e("span",{style:{fontSize:11,fontWeight:400,opacity:0.8}},"10 random")),
+e("button",{onClick:()=>startQ(null,true),style:{padding:20,background:PT.gray,border:"none",borderRadius:14,color:"#fff",fontSize:14,fontWeight:700,cursor:"pointer",textAlign:"left"}},
+e("div",{style:{fontSize:24,marginBottom:6}},"⏱"),"Timed Exam",e("br"),e("span",{style:{fontSize:11,fontWeight:400,opacity:0.8}},"20 Qs, countdown")),
+e("button",{onClick:()=>{setView("flashcards");setFcIdx(0);setFlipped(false);setSelArea(null);},style:{padding:20,background:PT.card,border:"1.5px solid "+PT.border,borderRadius:14,color:PT.text,fontSize:14,fontWeight:700,cursor:"pointer",textAlign:"left"}},
+e("div",{style:{fontSize:24,marginBottom:6}},"🃏"),"Flashcards",e("br"),e("span",{style:{fontSize:11,fontWeight:400,color:PT.textLight}},FCS.length+" cards")),
+e("button",{onClick:rst,style:{padding:20,background:PT.card,border:"1.5px solid "+PT.border,borderRadius:14,color:PT.text,fontSize:14,fontWeight:700,cursor:"pointer",textAlign:"left"}},
+e("div",{style:{fontSize:24,marginBottom:6}},"🔄"),"Reset",e("br"),e("span",{style:{fontSize:11,fontWeight:400,color:PT.textLight}},"Start fresh"))
+),
+// Areas
+e("div",{style:{fontSize:15,fontWeight:700,color:PT.grayDark,marginBottom:10}},"Study by Topic"),
+...AREAS.map(a=>{const s=aSt(a.k);return e("button",{key:a.k,onClick:()=>startQ(a.k,false),style:{display:"block",width:"100%",textAlign:"left",background:PT.card,border:"1.5px solid "+PT.border,borderRadius:14,padding:14,marginBottom:8,cursor:"pointer",borderLeft:"5px solid "+a.cl,boxShadow:"0 1px 4px rgba(0,0,0,0.03)"}},
+e("div",{style:{display:"flex",justifyContent:"space-between",alignItems:"center"}},
+e("div",null,
+e("div",{style:{fontSize:14,fontWeight:700,color:PT.grayDark}},a.l),
+e("div",{style:{fontSize:11,color:PT.textLight,marginTop:1}},a.w+" · "+s.tot+" Qs")
+),
+e("div",{style:{textAlign:"right"}},
+e("div",{style:{fontSize:22,fontWeight:800,color:a.cl}},s.pct+"%"),
+e("div",{style:{fontSize:10,color:PT.textLight}},s.mas+"/"+s.tot+" mastered")
+)
+),
+e("div",{style:{height:4,background:PT.cardAlt,borderRadius:2,marginTop:8}},
+e("div",{style:{height:4,background:a.cl,borderRadius:2,width:s.pct+"%",transition:"width 0.3s"}}))
+);}),
+// Tip
+e("div",{style:{background:PT.card,borderRadius:14,padding:16,marginTop:16,borderLeft:"5px solid "+PT.orange,boxShadow:"0 1px 4px rgba(0,0,0,0.03)"}},
+e("div",{style:{fontSize:13,fontWeight:700,color:PT.orange,marginBottom:4}},"💡 Grayce's Edge"),
+e("div",{style:{fontSize:12,color:PT.textMuted,lineHeight:1.7}},"Your Masters of Taxation covers ~60% of REG. Drill ",e("strong",null,"Business Law")," hardest — contracts, UCC, agency, bankruptcy. 76 MCQs + 8 TBS over 4 hours.")
+),
+e("div",{style:{textAlign:"center",fontSize:11,color:PT.textLight,marginTop:20,padding:12}},
+"Pack Tax South Ogden · 5640 Wasatch Dr. STE C",e("br"),
+QS.length+" questions · "+FCS.length+" flashcards · Saves automatically"
+)
+));
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(e(App));
+</script>
+</body>
+</html>

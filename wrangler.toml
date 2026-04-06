@@ -1,0 +1,7 @@
+name = "cpa-reg-prep"
+main = "worker.js"
+compatibility_date = "2024-01-01"
+
+routes = [
+  { pattern = "reg.fosterlabs.org", custom_domain = true }
+]
